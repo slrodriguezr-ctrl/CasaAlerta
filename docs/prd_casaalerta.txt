@@ -1,0 +1,25 @@
+# Documento de Requerimientos del Producto (PRD) - CasaAlerta
+
+## 1. Problema
+Los estudiantes universitarios que viven en apartamentos arrendados pueden encontrar problemas como humedad, grietas o filtraciones, pero muchas veces no tienen una forma organizada de registrar estos daños, demostrar cómo han evolucionado y comunicárselos al arrendador. Esto puede dificultar el seguimiento de los problemas y dejar al estudiante sin evidencias claras de cuándo aparecieron.
+
+## 2. Usuario
+Estudiantes universitarios (18-25 años) en Sogamoso que arriendan solos o comparten vivienda. Buscan documentar anomalías de forma ágil, visual y con respaldo cronológico sin terminología técnica compleja.
+
+## 3. Funciones Principales (MVP)
+1. **Registrar daño con foto**: Captura/subida de foto, tipología (humedad, grieta, filtración, plomería, eléctrico), ubicación en vivienda (habitación, baño, cocina, etc.), descripción y fecha.
+2. **Seguimiento cronológico (Time-lapse / timeline de evidencias)**: Adición progresiva de fotos en distintas fechas con notas de evolución.
+3. **Generador y visor de reporte PDF**: Maquetación estructurada lista para exportar/compartir vía WhatsApp con sellos de fecha, ubicación y evolución del daño.
+
+## 4. Fuera de Alcance (No hace)
+- Sin portal de arrendador / sin respuestas dentro de la app.
+- Sin backend complejo de mensajería con el casero.
+- Sin diagnóstico estructural pericial automatizado.
+- Sin recordatorios automáticos en v1.
+
+## 5. Requisitos Funcionales
+- **RF-01**: Registro de daño con foto, fecha, ubicación y descripción.
+- **RF-02**: Adición de fotos posteriores al mismo daño.
+- **RF-03**: Conservación de historial cronológico de fotos y notas.
+- **RF-04**: Generación de informe en PDF con formato formal de reclamo/notificación.
+- **RF-05**: Acciones directas para compartir reporte vía WhatsApp / exportar archivo.
