@@ -8,7 +8,7 @@
   <!-- Google Fonts: Plus Jakarta Sans & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
@@ -73,7 +73,7 @@
       aside, header, #sidebar-nav, .no-print, #view-dashboard, #view-nuevo-registro, #view-linea-de-tiempo {
         display: none !important;
       }
-      .pl-72 {
+      .pl-72, .md\:pl-72 {
         padding-left: 0 !important;
       }
       main {
@@ -99,57 +99,65 @@
     <div class="flex flex-col">
       <!-- Logo y Título -->
       <div class="h-16 flex items-center gap-3 px-6 border-b border-outline-variant/20">
-        <div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+        <div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-sm">
           <span class="material-symbols-outlined text-2xl">shield_with_house</span>
         </div>
         <div class="flex flex-col">
           <span class="font-bold text-lg text-primary tracking-tight">CasaAlerta</span>
-          <span class="text-[11px] text-on-surface-variant font-medium tracking-wide">Evidencia & Control</span>
+          <span class="text-[10px] text-on-surface-variant font-medium tracking-wide">Evidencia & Control Estudiantil</span>
         </div>
       </div>
 
-      <!-- Credencial Estudiantil -->
+      <!-- Credencial Estudiantil y Botón Cambiar Usuario -->
       <div class="px-4 py-3">
-        <div class="bg-surface-container-low p-3 rounded-lg flex items-center justify-between">
+        <button onclick="openUserModal()" class="w-full text-left bg-surface-container-low hover:bg-surface-container p-3 rounded-2xl flex items-center justify-between border border-outline-variant/30 transition-all group">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary text-base">verified_user</span>
-            <span class="text-xs text-primary font-semibold">Vigencia Certificada</span>
+            <div class="flex flex-col">
+              <span class="text-xs text-primary font-bold">Inquilino Activo</span>
+              <span class="text-[10px] text-on-surface-variant font-medium" id="sidebar-user-uni">UPTC Sogamoso</span>
+            </div>
           </div>
-          <span class="text-[10px] px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-semibold">UPTC Sogamoso</span>
-        </div>
+          <span class="text-[10px] px-2 py-0.5 rounded-lg bg-surface-container-highest text-primary font-bold group-hover:bg-primary group-hover:text-on-primary transition-colors">
+            Cambiar
+          </span>
+        </button>
       </div>
 
       <!-- Menú de Navegación -->
-      <nav class="flex flex-col gap-1 px-4 mt-2" id="sidebar-nav">
-        <a href="#dashboard" data-path="dashboard" class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all bg-primary-container text-on-primary font-semibold text-sm">
+      <nav class="flex flex-col gap-1 px-4 mt-1" id="sidebar-nav">
+        <a href="#dashboard" data-path="dashboard" class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all bg-primary-container text-on-primary font-bold text-xs">
           <span class="material-symbols-outlined text-lg">dashboard</span>
           <span>Mis Daños / Dashboard</span>
         </a>
-        <a href="#nuevo-registro" data-path="nuevo-registro" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-sm">
+        <a href="#nuevo-registro" data-path="nuevo-registro" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-xs font-semibold">
           <span class="material-symbols-outlined text-lg">add_a_photo</span>
           <span>+ Registrar Nuevo Daño</span>
         </a>
-        <a href="#linea-de-tiempo" data-path="linea-de-tiempo" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-sm">
+        <a href="#linea-de-tiempo" data-path="linea-de-tiempo" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-xs font-semibold">
           <span class="material-symbols-outlined text-lg">history_edu</span>
           <span>Línea de Tiempo & Evolución</span>
         </a>
-        <a href="#reportes-pdf" data-path="reportes-pdf" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-sm">
+        <a href="#reportes-pdf" data-path="reportes-pdf" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-xs font-semibold">
           <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
           <span>Generador de Reportes PDF</span>
         </a>
       </nav>
     </div>
 
-    <!-- Tarjeta de Contrato / Apartamento -->
-    <div class="p-4 m-4 bg-surface-container-low rounded-xl border border-outline-variant/30">
+    <!-- Tarjeta de Inmueble Actual -->
+    <div class="p-4 m-4 bg-surface-container-low rounded-2xl border border-outline-variant/30">
       <div class="flex items-center gap-1.5 text-secondary mb-1">
         <span class="material-symbols-outlined text-base">apartment</span>
-        <span class="text-[10px] uppercase font-bold tracking-wider">Inmueble Arrendado</span>
+        <span class="text-[10px] uppercase font-bold tracking-wider">Inmueble Seleccionado</span>
       </div>
-      <p class="text-xs text-on-surface font-bold leading-tight">Apto 302 — Residencias El Sol</p>
-      <p class="text-[11px] text-on-surface-variant mt-0.5">Sogamoso • Vigencia 2024-2</p>
+      <p class="text-xs text-on-surface font-bold leading-tight" id="sidebar-apto-name">Apartamento 302 — Residencias El Sol</p>
+      <p class="text-[10px] text-on-surface-variant mt-0.5" id="sidebar-apto-term">Cra 11 # 14-25 • Vigencia 2024-2</p>
       <div class="mt-2 pt-2 border-t border-outline-variant/20 flex items-center justify-between text-on-surface-variant">
-        <span class="text-[10px] font-medium text-primary">Estado: Activo</span>
+        <button onclick="openUserModal()" class="text-[10px] font-bold text-primary hover:underline flex items-center gap-0.5">
+          <span class="material-symbols-outlined text-xs">switch_account</span>
+          <span>Cambiar Inmueble</span>
+        </button>
         <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
       </div>
     </div>
@@ -161,55 +169,60 @@
     <!-- HEADER SUPERIOR -->
     <header class="fixed top-0 left-0 md:left-72 right-0 h-16 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 z-40 px-4 md:px-8 flex items-center justify-between no-print">
       <div class="flex items-center gap-3">
-        <!-- Botón menú móvil -->
-        <div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg text-on-surface">
+        <!-- Indicador de Inmueble Activo -->
+        <button onclick="openUserModal()" class="flex items-center gap-2 bg-surface-container-low hover:bg-surface-container px-3 py-1.5 rounded-xl text-on-surface border border-outline-variant/30 transition-all text-left">
           <span class="material-symbols-outlined text-primary text-base">location_on</span>
-          <div class="flex flex-col text-left">
-            <span class="text-[10px] text-on-surface-variant leading-none">Inmueble Activo</span>
-            <span class="text-xs font-bold text-on-surface mt-0.5">Apto 302 - Residencias El Sol, Sogamoso</span>
+          <div class="flex flex-col">
+            <span class="text-[9px] text-on-surface-variant uppercase font-bold leading-none">Inmueble Activo (Clic para cambiar)</span>
+            <span class="text-xs font-bold text-on-surface mt-0.5" id="header-user-apto">Apto 302 - Residencias El Sol, Sogamoso</span>
           </div>
-        </div>
+          <span class="material-symbols-outlined text-xs text-on-surface-variant ml-1">expand_more</span>
+        </button>
       </div>
 
       <div class="flex items-center gap-3">
-        <a href="#nuevo-registro" data-path="nuevo-registro" class="hidden sm:inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary px-3 py-2 rounded-lg text-xs font-semibold transition-colors shadow-sm">
+        <a href="#nuevo-registro" data-path="nuevo-registro" class="hidden sm:inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary px-3 py-2 rounded-xl text-xs font-bold transition-colors shadow-sm">
           <span class="material-symbols-outlined text-sm">add_circle</span>
           <span>Nuevo Registro</span>
         </a>
+
         <div class="h-6 w-[1px] bg-outline-variant/40"></div>
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+
+        <!-- Chip del Usuario Activo (Clickeable para Cambiar/Registrar) -->
+        <button onclick="openUserModal()" class="flex items-center gap-2.5 p-1.5 pl-2.5 rounded-xl hover:bg-surface-container-low transition-colors border border-transparent hover:border-outline-variant/40 group" title="Cambiar o registrar usuario">
+          <div class="flex flex-col text-right hidden sm:flex">
+            <span class="text-xs font-bold text-on-surface leading-tight" id="header-user-name">Mateo Gómez</span>
+            <span class="text-[10px] text-primary font-medium leading-none" id="header-user-uni">UPTC Sogamoso</span>
+          </div>
+          <div class="w-8 h-8 rounded-xl bg-primary text-on-primary flex items-center justify-center font-bold text-xs shadow-sm group-hover:scale-105 transition-transform" id="header-user-avatar">
             MG
           </div>
-          <div class="hidden sm:flex flex-col text-left">
-            <span class="text-xs font-bold text-on-surface leading-tight">Mateo Gómez</span>
-            <span class="text-[10px] text-on-surface-variant leading-none">UPTC Sogamoso</span>
-          </div>
-        </div>
+          <span class="material-symbols-outlined text-xs text-on-surface-variant">keyboard_arrow_down</span>
+        </button>
       </div>
     </header>
 
     <!-- NAVEGACIÓN MÓVIL INFERIOR -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container-lowest border-t border-outline-variant/30 z-50 flex items-center justify-around px-2 no-print">
-      <a href="#dashboard" data-path="dashboard" class="flex flex-col items-center gap-0.5 text-primary text-xs font-semibold">
+      <a href="#dashboard" data-path="dashboard" class="flex flex-col items-center gap-0.5 text-primary text-xs font-bold">
         <span class="material-symbols-outlined text-xl">dashboard</span>
         <span>Daños</span>
       </a>
-      <a href="#nuevo-registro" data-path="nuevo-registro" class="flex flex-col items-center gap-0.5 text-on-surface-variant text-xs font-semibold">
+      <a href="#nuevo-registro" data-path="nuevo-registro" class="flex flex-col items-center gap-0.5 text-on-surface-variant text-xs font-bold">
         <span class="material-symbols-outlined text-xl">add_a_photo</span>
         <span>+ Nuevo</span>
       </a>
-      <a href="#linea-de-tiempo" data-path="linea-de-tiempo" class="flex flex-col items-center gap-0.5 text-on-surface-variant text-xs font-semibold">
+      <a href="#linea-de-tiempo" data-path="linea-de-tiempo" class="flex flex-col items-center gap-0.5 text-on-surface-variant text-xs font-bold">
         <span class="material-symbols-outlined text-xl">history_edu</span>
         <span>Evolución</span>
       </a>
-      <a href="#reportes-pdf" data-path="reportes-pdf" class="flex flex-col items-center gap-0.5 text-on-surface-variant text-xs font-semibold">
+      <a href="#reportes-pdf" data-path="reportes-pdf" class="flex flex-col items-center gap-0.5 text-on-surface-variant text-xs font-bold">
         <span class="material-symbols-outlined text-xl">picture_as_pdf</span>
         <span>PDF / Enviar</span>
       </a>
     </nav>
 
-    <!-- CONTENIDO DE LAS VISTAS -->
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="w-full pt-16 pb-20 md:pb-8 flex-1">
 
       <!-- ========================================== -->
@@ -217,30 +230,30 @@
       <!-- ========================================== -->
       <section id="view-dashboard" class="p-4 md:p-8 max-w-[1280px] w-full mx-auto space-y-6">
         <!-- Banner Probatorio -->
-        <div class="relative overflow-hidden rounded-2xl bg-surface-container-low p-6 md:p-8 border border-outline-variant/30 shadow-sm">
+        <div class="relative overflow-hidden rounded-3xl bg-surface-container-low p-6 md:p-8 border border-outline-variant/30 shadow-sm">
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
             <div class="space-y-2 max-w-2xl">
               <div class="flex items-center gap-2 text-secondary text-xs uppercase tracking-wider font-bold">
                 <span class="material-symbols-outlined text-sm">verified_user</span>
                 <span>Expediente Probatorio Activo</span>
                 <span>•</span>
-                <span class="text-on-surface-variant">Radicado UPTC-SOG-302</span>
+                <span class="text-on-surface-variant" id="dashboard-banner-radicado">Radicado UPTC-SOG-302</span>
               </div>
-              <h1 class="text-2xl md:text-3xl font-bold text-primary tracking-tight">
+              <h1 class="text-2xl md:text-3xl font-extrabold text-primary tracking-tight" id="dashboard-banner-title">
                 Apartamento 302 — Residencias El Sol (Sogamoso)
               </h1>
-              <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed">
+              <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed" id="dashboard-banner-desc">
                 Incidencias documentadas con soporte fotográfico y cronológico para respaldo ante el arrendador. Vigencia contrato: Agosto — Diciembre 2024.
               </p>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
-              <a href="#nuevo-registro" data-path="nuevo-registro" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-container text-on-primary text-xs font-bold px-4 py-2.5 rounded-lg transition-all shadow">
+              <button onclick="openUserModal()" class="inline-flex items-center gap-1.5 bg-surface-container-lowest hover:bg-surface-container text-primary text-xs font-bold px-3.5 py-2.5 rounded-xl border border-outline-variant/30 transition-all shadow-sm">
+                <span class="material-symbols-outlined text-sm">switch_account</span>
+                <span>Cambiar Usuario</span>
+              </button>
+              <a href="#nuevo-registro" data-path="nuevo-registro" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow">
                 <span class="material-symbols-outlined text-sm">add_a_photo</span>
                 <span>+ Registrar Daño</span>
-              </a>
-              <a href="#reportes-pdf" data-path="reportes-pdf" class="inline-flex items-center gap-2 bg-surface-container-lowest hover:bg-surface-container text-primary text-xs font-semibold px-4 py-2.5 rounded-lg border border-outline-variant/30 transition-all shadow-sm">
-                <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
-                <span>Ver Reporte PDF</span>
               </a>
             </div>
           </div>
@@ -248,38 +261,38 @@
           <!-- Ribbon de Métricas Rápidas -->
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6 pt-4 border-t border-outline-variant/30">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-secondary-container/20 text-secondary flex items-center justify-center font-bold">
+              <div class="w-10 h-10 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center font-bold">
                 <span class="material-symbols-outlined text-xl">warning</span>
               </div>
               <div class="flex flex-col">
-                <span class="text-xl font-bold text-on-surface" id="stat-active-damages">3</span>
+                <span class="text-xl font-extrabold text-on-surface" id="stat-active-damages">3</span>
                 <span class="text-[11px] text-on-surface-variant">Daños Activos</span>
               </div>
             </div>
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-primary-fixed text-primary flex items-center justify-center font-bold">
+              <div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center font-bold">
                 <span class="material-symbols-outlined text-xl">photo_library</span>
               </div>
               <div class="flex flex-col">
-                <span class="text-xl font-bold text-on-surface" id="stat-total-evidences">5</span>
+                <span class="text-xl font-extrabold text-on-surface" id="stat-total-evidences">5</span>
                 <span class="text-[11px] text-on-surface-variant">Evidencias Cargadas</span>
               </div>
             </div>
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-tertiary-fixed/30 text-tertiary-container flex items-center justify-center font-bold">
+              <div class="w-10 h-10 rounded-xl bg-tertiary-fixed/30 text-tertiary-container flex items-center justify-center font-bold">
                 <span class="material-symbols-outlined text-xl">picture_as_pdf</span>
               </div>
               <div class="flex flex-col">
-                <span class="text-xl font-bold text-on-surface">1</span>
+                <span class="text-xl font-extrabold text-on-surface">1</span>
                 <span class="text-[11px] text-on-surface-variant">Reporte PDF Formal</span>
               </div>
             </div>
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold">
+              <div class="w-10 h-10 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold">
                 <span class="material-symbols-outlined text-xl">gavel</span>
               </div>
               <div class="flex flex-col">
-                <span class="text-xl font-bold text-on-surface">100%</span>
+                <span class="text-xl font-extrabold text-on-surface">100%</span>
                 <span class="text-[11px] text-on-surface-variant">Soporte Pericial</span>
               </div>
             </div>
@@ -290,15 +303,16 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div class="flex flex-wrap items-center gap-1.5">
             <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mr-1">Tipo:</span>
-            <button data-filter="all" class="filter-type-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-on-primary transition-all">Todos</button>
-            <button data-filter="humedad" class="filter-type-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container transition-all">Humedad</button>
-            <button data-filter="grietas" class="filter-type-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container transition-all">Grietas</button>
-            <button data-filter="acabados" class="filter-type-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container transition-all">Cerrajería / Acabados</button>
+            <button data-filter="all" class="filter-type-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-primary text-on-primary transition-all">Todos</button>
+            <button data-filter="humedad" class="filter-type-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container transition-all">Humedad</button>
+            <button data-filter="grietas" class="filter-type-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container transition-all">Grietas</button>
+            <button data-filter="plomeria" class="filter-type-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container transition-all">Plomería</button>
+            <button data-filter="acabados" class="filter-type-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:bg-surface-container transition-all">Cerrajería / Acabados</button>
           </div>
 
           <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Zona:</span>
-            <select id="zone-filter-select" class="bg-surface-container-lowest text-on-surface text-xs font-semibold px-3 py-1.5 rounded-lg border border-outline-variant/40 focus:outline-none focus:ring-2 focus:ring-primary">
+            <select id="zone-filter-select" class="bg-surface-container-lowest text-on-surface text-xs font-bold px-3 py-2 rounded-xl border border-outline-variant/40 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm">
               <option value="all">Todas las dependencias</option>
               <option value="Baño">Baño principal</option>
               <option value="Habitación">Habitación</option>
@@ -310,7 +324,7 @@
 
         <!-- Grilla de Tarjetas de Daños -->
         <div id="dashboard-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Cargado dinámicamente por app.js -->
+          <!-- Cargado dinámicamente -->
         </div>
       </section>
 
@@ -326,49 +340,49 @@
               <span>Respaldo Jurídico Inmediato (RF-01)</span>
             </div>
             <h1 class="text-2xl md:text-3xl font-bold text-primary tracking-tight">Registrar Nuevo Daño o Hallazgo</h1>
-            <p class="text-xs md:text-sm text-on-surface-variant">Documenta el problema con fotografía, fecha certificada y ubicación para contar con respaldo legal ante el arrendador.</p>
+            <p class="text-xs md:text-sm text-on-surface-variant">Toma una fotografía directa desde tu celular, webcam o sube un archivo con fecha y GPS certificado.</p>
           </div>
-          <div class="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-xl text-xs border border-outline-variant/30">
+          <div class="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-2xl text-xs border border-outline-variant/30">
             <span class="material-symbols-outlined text-primary text-base">verified</span>
             <div>
               <span class="text-[10px] text-on-surface-variant block">Sogamoso — Boyacá</span>
-              <span class="font-bold text-on-surface">Apto 302 - El Sol</span>
+              <span class="font-bold text-on-surface">GPS Certificado</span>
             </div>
           </div>
         </div>
 
         <form id="damage-form" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <!-- Columna Izquierda: Captura Fotográfica & EXIF -->
+          <!-- Columna Izquierda: Captura Fotográfica Universal -->
           <div class="lg:col-span-6 flex flex-col gap-4">
-            <div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 shadow-sm flex flex-col gap-4">
+            <div class="bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm flex flex-col gap-4">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-primary text-xl">photo_camera</span>
                   <h2 class="font-bold text-base text-on-surface">1. Evidencia Fotográfica Principal</h2>
                 </div>
-                <span class="text-[10px] bg-primary-fixed text-primary px-2 py-0.5 rounded font-bold">Requerido</span>
+                <span class="text-[10px] bg-primary-fixed text-primary px-2.5 py-0.5 rounded-full font-bold">Requerido</span>
               </div>
 
-              <!-- Vista Previa de Imagen -->
-              <div class="relative bg-surface-container-low rounded-xl p-3 flex flex-col gap-3">
-                <div class="relative w-full h-64 rounded-lg overflow-hidden bg-surface-container-highest">
+              <!-- Vista Previa de Imagen con Drop Zone -->
+              <div id="photo-drop-zone" class="relative bg-surface-container-low rounded-2xl p-3 flex flex-col gap-3 border-2 border-dashed border-outline-variant/60 transition-all group">
+                <div class="relative w-full h-64 rounded-xl overflow-hidden bg-surface-container-highest shadow-inner">
                   <img id="main-preview-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx5977dDqqrRyBeFybyFLxe5RE7zR4PUDBhy97AZM_ujfGnUhdJTFZA5Pz0PWNwuemHUMXlifdelUIa1KaRnwRb34i0rkV426pMhpJ-71IWdhuL5MrT3w4_Et1roUuaYo_CnBjMEs8wEMLEvgie3CZ411jz4gR5eIyfTjhelHkFXB1nspsHAioyTaSIgdp2cAMQQTSI85wx5C9UGDE40bmpQVJMRtGnXP4C4piPe3fhpI-k0I8gruj6A" alt="Vista previa del daño" class="w-full h-full object-cover" />
-                  <div class="absolute top-2 left-2 bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded text-[10px] flex items-center gap-1 font-semibold">
+                  <div class="absolute top-2 left-2 bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg text-[10px] flex items-center gap-1 font-bold">
                     <span class="material-symbols-outlined text-secondary-container text-xs">verified</span>
-                    <span>Fecha y GPS Certificado</span>
+                    <span>Fecha & GPS Certificado</span>
                   </div>
                 </div>
 
                 <!-- Bloque EXIF Automático -->
-                <div class="bg-surface-container-lowest p-3 rounded-lg border border-outline-variant/30 flex flex-col gap-1.5 text-xs">
+                <div class="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/30 flex flex-col gap-1.5 text-xs">
                   <div class="flex items-center justify-between">
-                    <span class="text-[11px] text-on-surface-variant font-medium">Metadatos automáticos EXIF</span>
+                    <span class="text-[11px] text-on-surface-variant font-medium">Metadatos automáticos de captura</span>
                     <span class="text-[11px] text-primary font-bold">Integridad Válida (SHA-256)</span>
                   </div>
                   <div class="grid grid-cols-2 gap-2 text-[11px] text-on-surface">
                     <div class="flex items-center gap-1">
                       <span class="material-symbols-outlined text-xs text-on-surface-variant">event</span>
-                      <span>Hoy — Certificado Local</span>
+                      <span>Fecha Hoy — Certificado Local</span>
                     </div>
                     <div class="flex items-center gap-1">
                       <span class="material-symbols-outlined text-xs text-on-surface-variant">location_on</span>
@@ -377,23 +391,42 @@
                   </div>
                 </div>
 
-                <!-- Input Subir Archivo Real -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
-                  <p class="text-[11px] text-on-surface-variant text-center sm:text-left">Sube una foto desde tu celular o computador:</p>
-                  <label class="cursor-pointer inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary text-xs font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm">
-                    <span class="material-symbols-outlined text-sm">file_upload</span>
-                    <span>Subir Foto (JPG, PNG)</span>
-                    <input type="file" id="photo-upload-input" accept="image/*" class="hidden" />
-                  </label>
+                <!-- Botones de Acción Fotográfica: Móvil + Webcam + Archivo -->
+                <div class="flex flex-col gap-2 pt-1">
+                  <span class="text-[11px] font-bold text-on-surface-variant">Opciones de Captura:</span>
+                  
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <!-- Opción 1: Cámara de Celular Directa -->
+                    <label class="cursor-pointer inline-flex items-center justify-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary text-xs font-bold py-2.5 px-3 rounded-xl transition-all shadow-sm text-center">
+                      <span class="material-symbols-outlined text-base">photo_camera</span>
+                      <span>Cámara Celular</span>
+                      <input type="file" id="mobile-camera-input" accept="image/*" capture="environment" class="hidden" />
+                    </label>
+
+                    <!-- Opción 2: Cámara Web en Vivo (PC / Laptop) -->
+                    <button type="button" onclick="startLiveCamera('new')" class="inline-flex items-center justify-center gap-1.5 bg-secondary-container hover:bg-secondary-fixed text-on-surface text-xs font-bold py-2.5 px-3 rounded-xl transition-all shadow-sm">
+                      <span class="material-symbols-outlined text-base">videocam</span>
+                      <span>Cámara Web</span>
+                    </button>
+
+                    <!-- Opción 3: Subir Archivo o Galería -->
+                    <label class="cursor-pointer inline-flex items-center justify-center gap-1.5 bg-surface-container hover:bg-surface-container-high text-primary text-xs font-bold py-2.5 px-3 rounded-xl transition-all border border-outline-variant/30 text-center">
+                      <span class="material-symbols-outlined text-base">file_upload</span>
+                      <span>Galería / PC</span>
+                      <input type="file" id="photo-upload-input" accept="image/*" class="hidden" />
+                    </label>
+                  </div>
+
+                  <p class="text-[10px] text-outline text-center mt-1">También puedes arrastrar una foto directamente aquí desde tu computador.</p>
                 </div>
 
-                <!-- Ejemplos rápidos si no se tiene imagen lista -->
+                <!-- Casos típicos de prueba rápida -->
                 <div class="pt-2 border-t border-outline-variant/20" id="sample-photos-selector">
-                  <span class="text-[10px] text-on-surface-variant block mb-1">O selecciona un caso típico de prueba:</span>
+                  <span class="text-[10px] text-on-surface-variant block mb-1 font-semibold">O selecciona un caso de referencia rápido:</span>
                   <div class="flex flex-wrap gap-1.5">
-                    <button type="button" data-img-url="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" class="text-[10px] bg-surface-container px-2 py-1 rounded text-primary hover:bg-surface-container-high font-medium">Grieta muro</button>
-                    <button type="button" data-img-url="https://lh3.googleusercontent.com/aida-public/AB6AXuBiP87NMFx0UKMEZ69kBLk93LK0np0BDEaxeaiV4zm-H9-eCTOJ-ARElQsDrKWf2UVXlNx87imuf_9E2N4paC8q5_GsgpwYk0ch0aIHtYJLF6I7O1dt0tSq-WtGtKShhZhT8iNbTEtiZzGfu6VVTxPV5dp1RGwOGkQyBpL5pfArw7pOUJxNf7FvJjDF0au_UvreOIrLlxJVbU9-KIT8rTH8pn3OG2V7_bKGeios8V7PzJ5OrD0bxXCofw" class="text-[10px] bg-surface-container px-2 py-1 rounded text-primary hover:bg-surface-container-high font-medium">Humedad techo</button>
-                    <button type="button" data-img-url="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80" class="text-[10px] bg-surface-container px-2 py-1 rounded text-primary hover:bg-surface-container-high font-medium">Tubería baño</button>
+                    <button type="button" data-img-url="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" class="text-[10px] bg-surface-container px-2.5 py-1 rounded-lg text-primary hover:bg-surface-container-high font-bold">Grieta muro</button>
+                    <button type="button" data-img-url="https://lh3.googleusercontent.com/aida-public/AB6AXuBiP87NMFx0UKMEZ69kBLk93LK0np0BDEaxeaiV4zm-H9-eCTOJ-ARElQsDrKWf2UVXlNx87imuf_9E2N4paC8q5_GsgpwYk0ch0aIHtYJLF6I7O1dt0tSq-WtGtKShhZhT8iNbTEtiZzGfu6VVTxPV5dp1RGwOGkQyBpL5pfArw7pOUJxNf7FvJjDF0au_UvreOIrLlxJVbU9-KIT8rTH8pn3OG2V7_bKGeios8V7PzJ5OrD0bxXCofw" class="text-[10px] bg-surface-container px-2.5 py-1 rounded-lg text-primary hover:bg-surface-container-high font-bold">Humedad techo</button>
+                    <button type="button" data-img-url="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80" class="text-[10px] bg-surface-container px-2.5 py-1 rounded-lg text-primary hover:bg-surface-container-high font-bold">Tubería baño</button>
                   </div>
                 </div>
               </div>
@@ -402,7 +435,7 @@
 
           <!-- Columna Derecha: Datos Técnicos y Periciales -->
           <div class="lg:col-span-6 flex flex-col gap-4">
-            <div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 shadow-sm flex flex-col gap-4">
+            <div class="bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm flex flex-col gap-4">
               <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary text-xl">assignment</span>
                 <h2 class="font-bold text-base text-on-surface">2. Clasificación y Detalles del Daño</h2>
@@ -410,31 +443,31 @@
 
               <!-- Título de la Incidencia -->
               <div class="flex flex-col gap-1">
-                <label for="damage-title" class="text-xs font-semibold text-on-surface">Título o Identificador de la Incidencia</label>
-                <input type="text" id="damage-title" placeholder="Ej: Filtración activa con mancha amarilla en techo" class="bg-surface-container-low border border-outline-variant/40 rounded-lg px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" />
+                <label for="damage-title" class="text-xs font-bold text-on-surface">Título o Identificador de la Incidencia</label>
+                <input type="text" id="damage-title" placeholder="Ej: Filtración activa con mancha amarilla en techo" class="bg-surface-container-low border border-outline-variant/40 rounded-xl px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
               </div>
 
               <!-- Tipología (Chips) -->
               <div class="flex flex-col gap-1.5">
-                <label class="text-xs font-semibold text-on-surface">Tipología de Daño (PRD Requerido)</label>
+                <label class="text-xs font-bold text-on-surface">Tipología de Daño (PRD Requerido)</label>
                 <div class="flex flex-wrap gap-2">
-                  <button type="button" data-type="humedad" class="typology-chip px-3 py-1.5 rounded-lg text-xs bg-primary text-on-primary font-bold flex items-center gap-1 transition-all">
+                  <button type="button" data-type="humedad" class="typology-chip px-3 py-1.5 rounded-xl text-xs bg-primary text-on-primary font-bold flex items-center gap-1 transition-all">
                     <span class="material-symbols-outlined text-sm">water_drop</span>
                     <span>Humedad</span>
                   </button>
-                  <button type="button" data-type="grietas" class="typology-chip px-3 py-1.5 rounded-lg text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 transition-all">
+                  <button type="button" data-type="grietas" class="typology-chip px-3 py-1.5 rounded-xl text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 font-bold transition-all">
                     <span class="material-symbols-outlined text-sm">broken_image</span>
                     <span>Grieta</span>
                   </button>
-                  <button type="button" data-type="plomeria" class="typology-chip px-3 py-1.5 rounded-lg text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 transition-all">
+                  <button type="button" data-type="plomeria" class="typology-chip px-3 py-1.5 rounded-xl text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 font-bold transition-all">
                     <span class="material-symbols-outlined text-sm">plumbing</span>
                     <span>Filtración / Plomería</span>
                   </button>
-                  <button type="button" data-type="electrico" class="typology-chip px-3 py-1.5 rounded-lg text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 transition-all">
+                  <button type="button" data-type="electrico" class="typology-chip px-3 py-1.5 rounded-xl text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 font-bold transition-all">
                     <span class="material-symbols-outlined text-sm">electric_bolt</span>
                     <span>Eléctrico</span>
                   </button>
-                  <button type="button" data-type="acabados" class="typology-chip px-3 py-1.5 rounded-lg text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 transition-all">
+                  <button type="button" data-type="acabados" class="typology-chip px-3 py-1.5 rounded-xl text-xs bg-surface-container-low text-on-surface-variant flex items-center gap-1 font-bold transition-all">
                     <span class="material-symbols-outlined text-sm">lock</span>
                     <span>Cerrajería / Acabados</span>
                   </button>
@@ -444,8 +477,8 @@
               <!-- Ubicación en el Inmueble y Fecha -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div class="flex flex-col gap-1">
-                  <label for="damage-room" class="text-xs font-semibold text-on-surface">Ubicación en la Vivienda</label>
-                  <select id="damage-room" class="bg-surface-container-low border border-outline-variant/40 rounded-lg px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary">
+                  <label for="damage-room" class="text-xs font-bold text-on-surface">Ubicación en la Vivienda</label>
+                  <select id="damage-room" class="bg-surface-container-low border border-outline-variant/40 rounded-xl px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium">
                     <option value="Baño Principal">Baño Principal</option>
                     <option value="Habitación 1 (Principal)">Habitación 1 (Principal)</option>
                     <option value="Habitación 2">Habitación 2</option>
@@ -456,16 +489,16 @@
                   </select>
                 </div>
                 <div class="flex flex-col gap-1">
-                  <label for="damage-date" class="text-xs font-semibold text-on-surface">Fecha de Detección</label>
-                  <input type="date" id="damage-date" class="bg-surface-container-low border border-outline-variant/40 rounded-lg px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" />
+                  <label for="damage-date" class="text-xs font-bold text-on-surface">Fecha de Detección</label>
+                  <input type="date" id="damage-date" class="bg-surface-container-low border border-outline-variant/40 rounded-xl px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
                 </div>
               </div>
 
               <!-- Severidad e Imputabilidad -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div class="flex flex-col gap-1">
-                  <label for="damage-severity" class="text-xs font-semibold text-on-surface">Severidad Estimada</label>
-                  <select id="damage-severity" class="bg-surface-container-low border border-outline-variant/40 rounded-lg px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary">
+                  <label for="damage-severity" class="text-xs font-bold text-on-surface">Severidad Estimada</label>
+                  <select id="damage-severity" class="bg-surface-container-low border border-outline-variant/40 rounded-xl px-3 py-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium">
                     <option value="Media">Media — Requiere atención</option>
                     <option value="Alta">Alta — Daño activo severo</option>
                     <option value="Crítica">Crítica — Riesgo estructural/seguridad</option>
@@ -473,13 +506,13 @@
                   </select>
                 </div>
                 <div class="flex flex-col gap-1">
-                  <label class="text-xs font-semibold text-on-surface">¿Existía al recibir el apto?</label>
+                  <label class="text-xs font-bold text-on-surface">¿Existía al recibir el apto?</label>
                   <div class="flex items-center gap-3 pt-1 text-xs">
-                    <label class="inline-flex items-center gap-1 cursor-pointer">
+                    <label class="inline-flex items-center gap-1 cursor-pointer font-medium">
                       <input type="radio" name="prior-existence" value="Existente Previo" checked class="text-primary focus:ring-primary" />
                       <span>Sí, previo</span>
                     </label>
-                    <label class="inline-flex items-center gap-1 cursor-pointer">
+                    <label class="inline-flex items-center gap-1 cursor-pointer font-medium">
                       <input type="radio" name="prior-existence" value="Incidencia Reportada" class="text-primary focus:ring-primary" />
                       <span>Apareció luego</span>
                     </label>
@@ -489,13 +522,13 @@
 
               <!-- Descripción Detallada -->
               <div class="flex flex-col gap-1">
-                <label for="damage-description" class="text-xs font-semibold text-on-surface">Descripción y Observaciones Periciales</label>
-                <textarea id="damage-description" rows="3" placeholder="Describe claramente el estado del daño: dimensiones aproximadas, si hay humedad al tacto, olores, descascaramiento o desprendimiento..." class="bg-surface-container-low border border-outline-variant/40 rounded-lg p-3 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                <label for="damage-description" class="text-xs font-bold text-on-surface">Descripción y Observaciones Periciales</label>
+                <textarea id="damage-description" rows="3" placeholder="Describe claramente el estado del daño: dimensiones aproximadas, si hay humedad al tacto, olores, descascaramiento o desprendimiento..." class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-3 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium"></textarea>
               </div>
 
               <!-- Botón Guardar -->
               <div class="pt-2">
-                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-container text-on-primary py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow">
+                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-container text-on-primary py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow">
                   <span class="material-symbols-outlined text-base">verified</span>
                   <span>Guardar y Certificar Registro Pericial (RF-01)</span>
                 </button>
@@ -510,7 +543,6 @@
       <!-- VISTA 3: LÍNEA DE TIEMPO & SEGUIMIENTO (RF-02 y RF-03) -->
       <!-- ========================================== -->
       <section id="view-linea-de-tiempo" class="hidden p-4 md:p-8 max-w-[1280px] w-full mx-auto space-y-6">
-        <!-- Selector de Daño a Inspeccionar -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-outline-variant/30 pb-4">
           <div class="space-y-1">
             <div class="flex items-center gap-1.5 text-secondary text-xs uppercase tracking-wider font-bold">
@@ -521,21 +553,21 @@
             <p class="text-xs text-on-surface-variant" id="timeline-subtitle">Evolución fotográfica y probatoria del daño seleccionado.</p>
           </div>
           <div class="flex items-center gap-2">
-            <label for="timeline-damage-select" class="text-xs font-semibold text-on-surface whitespace-nowrap">Ver Daño:</label>
-            <select id="timeline-damage-select" class="bg-surface-container-lowest border border-outline-variant/40 rounded-lg px-3 py-2 text-xs font-semibold text-on-surface focus:outline-none focus:ring-2 focus:ring-primary shadow-sm">
+            <label for="timeline-damage-select" class="text-xs font-bold text-on-surface whitespace-nowrap">Ver Daño:</label>
+            <select id="timeline-damage-select" class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl px-3 py-2 text-xs font-bold text-on-surface focus:outline-none focus:ring-2 focus:ring-primary shadow-sm">
               <!-- Cargado dinámicamente -->
             </select>
           </div>
         </div>
 
-        <!-- Módulo de Comparación Antes vs Después (Time-lapse) -->
-        <div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 shadow-sm space-y-4">
+        <!-- Módulo de Comparación Antes vs Después -->
+        <div class="bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-xl">compare</span>
               <h2 class="font-bold text-base text-primary">Comparación Cronológica (Antes vs. Después)</h2>
             </div>
-            <button onclick="openFollowUpModal(window.appStore.activeDamageId)" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary text-xs font-bold px-3 py-2 rounded-lg transition-colors shadow">
+            <button onclick="openFollowUpModal(window.appStore.activeDamageId)" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary text-xs font-bold px-3.5 py-2.5 rounded-xl transition-colors shadow">
               <span class="material-symbols-outlined text-sm">add_a_photo</span>
               <span>+ Añadir Foto Posterior (RF-02)</span>
             </button>
@@ -543,39 +575,37 @@
 
           <!-- Dos Columnas Comparativas -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Primera Evidencia -->
-            <div class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 flex flex-col">
+            <div class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/30 flex flex-col">
               <div class="relative w-full h-64 bg-surface-container-highest">
                 <img id="comparison-before-img" src="" alt="Primera Evidencia" class="w-full h-full object-cover" />
-                <div class="absolute top-2 left-2 bg-primary/90 text-on-primary text-[10px] px-2.5 py-1 rounded font-bold backdrop-blur-md flex items-center gap-1">
+                <div class="absolute top-2 left-2 bg-primary/90 text-on-primary text-[10px] px-2.5 py-1 rounded-lg font-bold backdrop-blur-md flex items-center gap-1">
                   <span class="material-symbols-outlined text-xs">history</span>
                   <span id="comparison-before-date">PRIMERA EVIDENCIA</span>
                 </div>
               </div>
-              <div class="p-3 flex flex-col gap-1">
+              <div class="p-3.5 flex flex-col gap-1">
                 <span class="text-xs font-bold text-primary">Estado Inicial</span>
-                <p class="text-xs text-on-surface-variant" id="comparison-before-desc"></p>
+                <p class="text-xs text-on-surface-variant leading-relaxed" id="comparison-before-desc"></p>
               </div>
             </div>
 
-            <!-- Última Evidencia -->
-            <div class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 flex flex-col">
+            <div class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/30 flex flex-col">
               <div class="relative w-full h-64 bg-surface-container-highest">
                 <img id="comparison-after-img" src="" alt="Última Evidencia" class="w-full h-full object-cover" />
-                <div class="absolute top-2 left-2 bg-error/90 text-on-error text-[10px] px-2.5 py-1 rounded font-bold backdrop-blur-md flex items-center gap-1">
+                <div class="absolute top-2 left-2 bg-error/90 text-on-error text-[10px] px-2.5 py-1 rounded-lg font-bold backdrop-blur-md flex items-center gap-1">
                   <span class="material-symbols-outlined text-xs">priority_high</span>
                   <span id="comparison-after-date">ÚLTIMA EVIDENCIA</span>
                 </div>
               </div>
-              <div class="p-3 flex flex-col gap-1">
+              <div class="p-3.5 flex flex-col gap-1">
                 <span class="text-xs font-bold text-error">Evolución Actual</span>
-                <p class="text-xs text-on-surface-variant" id="comparison-after-desc"></p>
+                <p class="text-xs text-on-surface-variant leading-relaxed" id="comparison-after-desc"></p>
               </div>
             </div>
           </div>
 
           <!-- Barra de Valor Jurídico -->
-          <div class="bg-surface-container-high/60 p-3 rounded-lg flex items-center justify-between gap-3 text-xs text-on-surface">
+          <div class="bg-surface-container-high/60 p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-surface">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-lg">gavel</span>
               <span>Esta secuencia cronológica demuestra la progresión temporal de la incidencia para eximir de culpa al estudiante.</span>
@@ -587,7 +617,7 @@
         </div>
 
         <!-- Timeline Vertical Detallado -->
-        <div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 shadow-sm space-y-4">
+        <div class="bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary text-xl">timeline</span>
@@ -605,8 +635,7 @@
       <!-- VISTA 4: GENERADOR DE REPORTE PDF & WHATSAPP (RF-04 y RF-05) -->
       <!-- ========================================== -->
       <section id="view-reportes-pdf" class="hidden p-4 md:p-8 max-w-[1280px] w-full mx-auto space-y-6">
-        <!-- Barra de Acciones del Reporte (no se imprime) -->
-        <div class="no-print bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/30 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div class="no-print bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div class="space-y-1">
             <div class="flex items-center gap-1.5 text-secondary text-xs uppercase tracking-wider font-bold">
               <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
@@ -617,25 +646,22 @@
           </div>
 
           <div class="flex flex-wrap items-center gap-2">
-            <button id="print-pdf-btn" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-container text-on-primary text-xs font-bold px-4 py-2.5 rounded-lg transition-colors shadow">
+            <button id="print-pdf-btn" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-container text-on-primary text-xs font-bold px-4 py-2.5 rounded-xl transition-colors shadow">
               <span class="material-symbols-outlined text-sm">print</span>
               <span>Descargar PDF / Imprimir</span>
             </button>
-            <a href="#whatsapp-dispatch-box" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors shadow">
+            <a href="#whatsapp-dispatch-box" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors shadow">
               <span class="material-symbols-outlined text-sm">send</span>
               <span>Notificar por WhatsApp</span>
             </a>
           </div>
         </div>
 
-        <!-- ============================================== -->
-        <!-- FOLIO FORMAL A4 (DOCUMENTO OFICIAL DE RECLAMO) -->
-        <!-- ============================================== -->
-        <div id="pdf-folio-container" class="bg-white text-black p-6 md:p-12 rounded-2xl border border-outline-variant/40 shadow-md max-w-[900px] mx-auto text-xs font-sans space-y-6">
-          <!-- Encabezado Institucional -->
+        <!-- FOLIO FORMAL A4 -->
+        <div id="pdf-folio-container" class="bg-white text-black p-6 md:p-12 rounded-3xl border border-outline-variant/40 shadow-md max-w-[900px] mx-auto text-xs font-sans space-y-6">
           <div class="flex items-start justify-between border-b-2 border-primary pb-4">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-primary text-white rounded-lg flex items-center justify-center font-bold text-xl">
+              <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center font-bold text-xl shadow">
                 CA
               </div>
               <div>
@@ -646,48 +672,45 @@
             </div>
             <div class="text-right">
               <span class="text-[10px] uppercase font-bold text-gray-500 block">Radicado Oficial</span>
-              <span class="text-sm font-mono font-bold text-primary">UPTC-SOG-302</span>
-              <span class="text-[10px] text-gray-500 block mt-0.5" id="pdf-report-date">22 de Octubre de 2024</span>
+              <span class="text-sm font-mono font-bold text-primary" id="pdf-header-radicado">UPTC-SOG-302</span>
+              <span class="text-[10px] text-gray-500 block mt-0.5" id="pdf-report-date">29 de Octubre de 2026</span>
             </div>
           </div>
 
-          <!-- Ficha de Partes y Contrato -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-gray-50 p-3 rounded-lg border border-gray-200">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-gray-50 p-3.5 rounded-xl border border-gray-200">
             <div>
               <span class="text-[10px] text-gray-500 font-bold uppercase block">Arrendatario / Declarativo</span>
-              <p class="font-bold text-gray-900 mt-0.5">Mateo Gómez</p>
-              <p class="text-gray-600">C.C. 1.052.741.982</p>
-              <p class="text-primary font-semibold text-[10px]">Estudiante UPTC Sogamoso</p>
+              <p class="font-bold text-gray-900 mt-0.5" id="pdf-student-name">Mateo Gómez</p>
+              <p class="text-gray-600" id="pdf-student-doc">C.C. 1.052.741.982</p>
+              <p class="text-primary font-semibold text-[10px]" id="pdf-student-uni">Estudiante UPTC Sogamoso</p>
             </div>
             <div>
               <span class="text-[10px] text-gray-500 font-bold uppercase block">Inmueble Objeto</span>
-              <p class="font-bold text-gray-900 mt-0.5">Apartamento 302</p>
+              <p class="font-bold text-gray-900 mt-0.5" id="pdf-apto-name">Apartamento 302</p>
               <p class="text-gray-600">Residencias El Sol</p>
-              <p class="text-gray-600 text-[10px]">Cra 11 # 14-25, Sogamoso</p>
+              <p class="text-gray-600 text-[10px]" id="pdf-apto-addr">Cra 11 # 14-25, Sogamoso</p>
             </div>
             <div>
               <span class="text-[10px] text-gray-500 font-bold uppercase block">Arrendador / Responsable</span>
-              <p class="font-bold text-gray-900 mt-0.5">Don Hernando Pérez</p>
+              <p class="font-bold text-gray-900 mt-0.5" id="pdf-landlord-name">Don Hernando Pérez</p>
               <p class="text-gray-600">Arrendador Inmueble</p>
-              <p class="text-gray-600 text-[10px]">Contrato Ref: V2024-UPTC-302</p>
+              <p class="text-gray-600 text-[10px]" id="pdf-contract-ref">Contrato Ref: V2024-UPTC-302</p>
             </div>
           </div>
 
-          <!-- Declaración Formal de Notificación -->
-          <div class="p-3 bg-blue-50/50 rounded-lg border-l-4 border-primary text-gray-800 space-y-1">
+          <div class="p-3 bg-blue-50/50 rounded-xl border-l-4 border-primary text-gray-800 space-y-1">
             <p class="font-bold text-primary text-[11px]">DECLARACIÓN JURÍDICA DE CONSTANCIA Y SALVEDAD PROBATORIA</p>
             <p class="leading-relaxed text-[11px]">
               El presente informe formaliza la relación de desperfectos, filtraciones y deterioros detectados en el inmueble arrendado. Se emite como soporte documental fehaciente con el fin de solicitar las reparaciones locativas o estructurales necesarias de conformidad con la ley de arrendamientos y eximir de responsabilidad pecuniaria al arrendatario respecto al depósito de garantía.
             </p>
           </div>
 
-          <!-- Cuadro Resumen de Incidencias -->
           <div class="space-y-2">
             <h3 class="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-primary"></span>
               <span>1. Cuadro Resumen de Incidencias Registradas</span>
             </h3>
-            <div class="overflow-x-auto border border-gray-200 rounded-lg">
+            <div class="overflow-x-auto border border-gray-200 rounded-xl">
               <table class="w-full text-left text-[11px]">
                 <thead class="bg-gray-100 text-gray-700 font-bold border-b border-gray-200">
                   <tr>
@@ -706,36 +729,32 @@
             </div>
           </div>
 
-          <!-- Fichas Fotográficas de Respaldo -->
           <div class="space-y-3">
             <h3 class="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-primary"></span>
               <span>2. Anexos Fotográficos y Cronología de Evolución</span>
             </h3>
             <div id="pdf-photo-sheets" class="space-y-4">
-              <!-- Llenado dinámico con fotos antes/después -->
+              <!-- Llenado dinámico -->
             </div>
           </div>
 
-          <!-- Firmas Formales -->
           <div class="pt-8 border-t border-gray-300 grid grid-cols-2 gap-8 text-center text-gray-700">
             <div>
               <div class="border-b border-gray-400 w-48 mx-auto mb-1"></div>
-              <p class="font-bold text-xs">Mateo Gómez</p>
+              <p class="font-bold text-xs" id="pdf-signature-student">Mateo Gómez</p>
               <p class="text-[10px] text-gray-500">Firma del Arrendatario (Declarativo)</p>
             </div>
             <div>
               <div class="border-b border-gray-400 w-48 mx-auto mb-1"></div>
-              <p class="font-bold text-xs">Don Hernando Pérez</p>
+              <p class="font-bold text-xs" id="pdf-signature-landlord">Don Hernando Pérez</p>
               <p class="text-[10px] text-gray-500">Recibido del Arrendador / Inmobiliaria</p>
             </div>
           </div>
         </div>
 
-        <!-- ============================================== -->
-        <!-- MÓDULO DE ENVÍO DIRECTO POR WHATSAPP (RF-05)  -->
-        <!-- ============================================== -->
-        <div id="whatsapp-dispatch-box" class="no-print bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/30 shadow-sm space-y-4 max-w-[900px] mx-auto">
+        <!-- MÓDULO DE ENVÍO DIRECTO POR WHATSAPP (RF-05) -->
+        <div id="whatsapp-dispatch-box" class="no-print bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant/30 shadow-sm space-y-4 max-w-[900px] mx-auto">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-[#25D366] text-2xl">chat</span>
             <div>
@@ -745,13 +764,13 @@
           </div>
 
           <div class="space-y-2">
-            <textarea id="whatsapp-message-text" rows="5" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-3 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+            <textarea id="whatsapp-message-text" rows="5" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-2xl p-3 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium"></textarea>
             <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-              <button id="copy-wa-msg-btn" class="inline-flex items-center gap-1.5 bg-surface-container hover:bg-surface-container-high text-primary px-3 py-2 rounded-lg text-xs font-semibold transition-colors">
+              <button id="copy-wa-msg-btn" class="inline-flex items-center gap-1.5 bg-surface-container hover:bg-surface-container-high text-primary px-3.5 py-2.5 rounded-xl text-xs font-bold transition-colors">
                 <span class="material-symbols-outlined text-sm">content_copy</span>
                 <span>Copiar Mensaje</span>
               </button>
-              <a id="whatsapp-send-link" href="#" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white px-5 py-2.5 rounded-lg text-xs font-bold transition-colors shadow">
+              <a id="whatsapp-send-link" href="#" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-colors shadow">
                 <span class="material-symbols-outlined text-sm">send</span>
                 <span>Abrir WhatsApp y Enviar Notificación</span>
               </a>
@@ -764,10 +783,150 @@
   </div>
 
   <!-- ========================================== -->
+  <!-- MODAL: GESTIÓN DE USUARIOS / PERFILES       -->
+  <!-- ========================================== -->
+  <div id="modal-user-management" class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest w-full max-w-xl rounded-3xl border border-outline-variant/30 shadow-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center font-bold text-sm">
+            <span class="material-symbols-outlined text-lg">manage_accounts</span>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-primary">Gestión de Inquilinos y Apartamentos</h2>
+            <p class="text-xs text-on-surface-variant">Selecciona un usuario existente o registra un nuevo apartamento.</p>
+          </div>
+        </div>
+        <button id="modal-user-close" class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Pestañas -->
+      <div class="flex items-center gap-2 bg-surface-container-low p-1.5 rounded-2xl">
+        <button id="tab-user-list-btn" type="button" class="flex-1 py-2 rounded-xl text-xs font-bold bg-primary text-on-primary transition-all">
+          Perfiles Registrados
+        </button>
+        <button id="tab-user-new-btn" type="button" class="flex-1 py-2 rounded-xl text-xs font-bold bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all">
+          + Registrar Nuevo Inquilino
+        </button>
+      </div>
+
+      <!-- Panel 1: Lista de Usuarios Existentes -->
+      <div id="panel-user-list" class="space-y-3">
+        <div id="user-profiles-list-container" class="space-y-2">
+          <!-- Renderizado dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Panel 2: Formulario Registrar Nuevo Usuario -->
+      <div id="panel-user-new" class="hidden space-y-3">
+        <form id="form-new-user" class="space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <label for="new-user-name" class="text-xs font-bold text-on-surface">Nombre Completo del Inquilino *</label>
+              <input type="text" id="new-user-name" required placeholder="Ej: Laura Sofía Pinzón" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+            </div>
+            <div class="space-y-1">
+              <label for="new-user-doc" class="text-xs font-bold text-on-surface">Cédula / Documento</label>
+              <input type="text" id="new-user-doc" placeholder="Ej: C.C. 1.053.882.110" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label for="new-user-uni" class="text-xs font-bold text-on-surface">Universidad o Institución</label>
+            <input type="text" id="new-user-uni" placeholder="Ej: UPTC Sogamoso — Ingeniería Geológica" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <label for="new-user-apt" class="text-xs font-bold text-on-surface">Apartamento / Inmueble *</label>
+              <input type="text" id="new-user-apt" required placeholder="Ej: Apto 204 — Torres del Bosque" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+            </div>
+            <div class="space-y-1">
+              <label for="new-user-addr" class="text-xs font-bold text-on-surface">Dirección en Sogamoso</label>
+              <input type="text" id="new-user-addr" placeholder="Ej: Calle 9 # 14-30, Sogamoso" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <label for="new-user-landlord" class="text-xs font-bold text-on-surface">Arrendador o Propietario</label>
+              <input type="text" id="new-user-landlord" placeholder="Ej: Carlos Julio Morales" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+            </div>
+            <div class="space-y-1">
+              <label for="new-user-phone" class="text-xs font-bold text-on-surface">WhatsApp del Arrendador</label>
+              <input type="tel" id="new-user-phone" placeholder="Ej: 573108889900" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label for="new-user-term" class="text-xs font-bold text-on-surface">Vigencia del Contrato</label>
+            <input type="text" id="new-user-term" placeholder="Ej: Agosto 2024 — Julio 2025" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
+          </div>
+
+          <div class="pt-3 border-t border-outline-variant/20 flex justify-end gap-2">
+            <button type="button" onclick="closeUserModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-on-surface-variant hover:bg-surface-container">
+              Cancelar
+            </button>
+            <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-primary hover:bg-primary-container text-on-primary shadow">
+              Guardar y Activar Inquilino
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: CÁMARA WEB EN VIVO (PC Y CELULAR)   -->
+  <!-- ========================================== -->
+  <div id="modal-camera" class="fixed inset-0 bg-inverse-surface/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest w-full max-w-lg rounded-3xl border border-outline-variant/30 shadow-2xl p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-xl">videocam</span>
+          <h2 class="text-base font-bold text-primary">Cámara en Vivo</h2>
+        </div>
+        <button id="modal-camera-close" class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Feed de Video -->
+      <div class="relative w-full h-72 rounded-2xl bg-black overflow-hidden flex items-center justify-center">
+        <video id="live-camera-video" class="w-full h-full object-cover" autoplay playsinline></video>
+        
+        <!-- Framing Overlay pericial -->
+        <div class="absolute inset-4 border border-white/40 pointer-events-none rounded-xl flex items-center justify-center">
+          <div class="w-6 h-6 border-t-2 border-l-2 border-white absolute top-0 left-0"></div>
+          <div class="w-6 h-6 border-t-2 border-r-2 border-white absolute top-0 right-0"></div>
+          <div class="w-6 h-6 border-b-2 border-l-2 border-white absolute bottom-0 left-0"></div>
+          <div class="w-6 h-6 border-b-2 border-r-2 border-white absolute bottom-0 right-0"></div>
+          <span class="text-white/60 text-[10px] uppercase font-bold tracking-widest">Enfoca el daño</span>
+        </div>
+      </div>
+
+      <div id="camera-error-msg" class="hidden p-3 rounded-xl bg-error-container text-error text-xs font-medium"></div>
+
+      <!-- Botón de Disparo -->
+      <div class="flex items-center justify-between pt-2">
+        <button type="button" onclick="stopLiveCamera()" class="px-4 py-2 rounded-xl text-xs font-bold text-on-surface-variant hover:bg-surface-container">
+          Cancelar
+        </button>
+        <button id="capture-snapshot-btn" type="button" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-container text-on-primary px-6 py-3 rounded-2xl text-xs font-bold shadow-lg transition-transform active:scale-95">
+          <span class="material-symbols-outlined text-lg">camera</span>
+          <span>Capturar Fotografía</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
   <!-- MODAL: AÑADIR FOTO DE SEGUIMIENTO (RF-02)  -->
   <!-- ========================================== -->
   <div id="modal-followup" class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-    <div class="bg-surface-container-lowest w-full max-w-lg rounded-2xl border border-outline-variant/30 shadow-2xl p-6 space-y-4">
+    <div class="bg-surface-container-lowest w-full max-w-lg rounded-3xl border border-outline-variant/30 shadow-2xl p-6 space-y-4">
       <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
         <div>
           <h2 class="text-base font-bold text-primary flex items-center gap-1.5">
@@ -782,17 +941,26 @@
       </div>
 
       <form id="followup-form" class="space-y-4">
-        <!-- Foto preview -->
+        <!-- Foto preview y controles universales -->
         <div class="space-y-2">
-          <label class="text-xs font-semibold text-on-surface">Fotografía de Evolución</label>
-          <div class="w-full h-44 rounded-lg bg-surface-container-low overflow-hidden border border-outline-variant/30 relative">
+          <label class="text-xs font-bold text-on-surface">Fotografía de Evolución</label>
+          <div class="w-full h-44 rounded-2xl bg-surface-container-low overflow-hidden border border-outline-variant/30 relative">
             <img id="followup-preview-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiP87NMFx0UKMEZ69kBLk93LK0np0BDEaxeaiV4zm-H9-eCTOJ-ARElQsDrKWf2UVXlNx87imuf_9E2N4paC8q5_GsgpwYk0ch0aIHtYJLF6I7O1dt0tSq-WtGtKShhZhT8iNbTEtiZzGfu6VVTxPV5dp1RGwOGkQyBpL5pfArw7pOUJxNf7FvJjDF0au_UvreOIrLlxJVbU9-KIT8rTH8pn3OG2V7_bKGeios8V7PzJ5OrD0bxXCofw" alt="Foto de seguimiento" class="w-full h-full object-cover" />
           </div>
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] text-on-surface-variant">Sube una nueva foto que muestre el avance del daño:</span>
-            <label class="cursor-pointer inline-flex items-center gap-1 bg-surface-container text-primary hover:bg-surface-container-high px-3 py-1.5 rounded text-xs font-semibold">
+
+          <div class="grid grid-cols-3 gap-2 pt-1">
+            <label class="cursor-pointer inline-flex items-center justify-center gap-1 bg-primary text-on-primary hover:bg-primary-container px-2 py-2 rounded-xl text-[11px] font-bold text-center transition-colors">
+              <span class="material-symbols-outlined text-xs">photo_camera</span>
+              <span>Cámara Cel</span>
+              <input type="file" id="followup-mobile-camera-input" accept="image/*" capture="environment" class="hidden" />
+            </label>
+            <button type="button" onclick="startLiveCamera('followup')" class="inline-flex items-center justify-center gap-1 bg-secondary-container hover:bg-secondary-fixed text-on-surface px-2 py-2 rounded-xl text-[11px] font-bold text-center transition-colors">
+              <span class="material-symbols-outlined text-xs">videocam</span>
+              <span>Webcam</span>
+            </button>
+            <label class="cursor-pointer inline-flex items-center justify-center gap-1 bg-surface-container text-primary hover:bg-surface-container-high px-2 py-2 rounded-xl text-[11px] font-bold text-center transition-colors border border-outline-variant/30">
               <span class="material-symbols-outlined text-xs">file_upload</span>
-              <span>Elegir Foto</span>
+              <span>Archivo</span>
               <input type="file" id="followup-file-input" accept="image/*" class="hidden" />
             </label>
           </div>
@@ -801,12 +969,12 @@
         <!-- Dimensiones y Severidad -->
         <div class="grid grid-cols-2 gap-3">
           <div class="space-y-1">
-            <label for="followup-dimensions" class="text-xs font-semibold text-on-surface">Dimensión / Alcance</label>
-            <input type="text" id="followup-dimensions" placeholder="Ej: Aumentó a Ø ~35 cm" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" />
+            <label for="followup-dimensions" class="text-xs font-bold text-on-surface">Dimensión / Alcance</label>
+            <input type="text" id="followup-dimensions" placeholder="Ej: Aumentó a Ø ~35 cm" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium" />
           </div>
           <div class="space-y-1">
-            <label for="followup-severity" class="text-xs font-semibold text-on-surface">Nueva Severidad</label>
-            <select id="followup-severity" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary">
+            <label for="followup-severity" class="text-xs font-bold text-on-surface">Nueva Severidad</label>
+            <select id="followup-severity" class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-bold">
               <option value="Alta">Alta</option>
               <option value="Crítica">Crítica</option>
               <option value="Media">Media</option>
@@ -817,16 +985,16 @@
 
         <!-- Notas de Evolución -->
         <div class="space-y-1">
-          <label for="followup-note" class="text-xs font-semibold text-on-surface">Observación de la Evolución</label>
-          <textarea id="followup-note" rows="3" placeholder="Describe qué ocurrió: desprendimiento de revoque, mayor filtración, goteo constante..." class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+          <label for="followup-note" class="text-xs font-bold text-on-surface">Observación de la Evolución</label>
+          <textarea id="followup-note" rows="3" placeholder="Describe qué ocurrió: desprendimiento de revoque, mayor filtración, goteo constante..." class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl p-2.5 text-xs text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-medium"></textarea>
         </div>
 
         <!-- Botones de Acción -->
         <div class="flex items-center justify-end gap-2 pt-2 border-t border-outline-variant/20">
-          <button type="button" id="modal-cancel-btn" class="px-4 py-2 rounded-lg text-xs font-semibold text-on-surface-variant hover:bg-surface-container">
+          <button type="button" id="modal-cancel-btn" class="px-4 py-2 rounded-xl text-xs font-bold text-on-surface-variant hover:bg-surface-container">
             Cancelar
           </button>
-          <button type="submit" class="px-4 py-2 rounded-lg text-xs font-bold bg-primary hover:bg-primary-container text-on-primary shadow">
+          <button type="submit" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-primary hover:bg-primary-container text-on-primary shadow">
             Guardar Evidencia (RF-02)
           </button>
         </div>
@@ -834,10 +1002,8 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- TOAST DE NOTIFICACIONES                    -->
-  <!-- ========================================== -->
-  <div id="toastNotification" class="fixed bottom-6 right-6 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-xl shadow-2xl z-50 hidden items-center gap-2 text-xs font-medium border border-outline-variant/30">
+  <!-- TOAST DE NOTIFICACIONES -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-2xl shadow-2xl z-50 hidden items-center gap-2 text-xs font-medium border border-outline-variant/30">
     <span class="material-symbols-outlined text-secondary-container text-base">check_circle</span>
     <span id="toastMessage">Operación realizada con éxito</span>
   </div>
